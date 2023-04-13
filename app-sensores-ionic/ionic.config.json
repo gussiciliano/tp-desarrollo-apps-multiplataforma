@@ -1,0 +1,7 @@
+{
+  "name": "app-sensores-ionic",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "angular"
+}
