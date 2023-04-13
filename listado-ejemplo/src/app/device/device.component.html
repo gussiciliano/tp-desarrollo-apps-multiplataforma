@@ -1,14 +1,13 @@
 <ion-item
-  *ngIf="message"
-  [routerLink]="'/message/' + message.id"
+  *ngIf="device"
+  [routerLink]="'/device/' + device.id"
   [detail]="false"
 >
-  <div slot="start" [class]="!message.read ? 'dot dot-unread' : 'dot'"></div>
   <ion-label class="ion-text-wrap">
     <h2>
-      {{ message.fromName }}
+      {{ device.name }}
       <span class="date">
-        <ion-note>{{ message.date }}</ion-note>
+        
         <ion-icon
           aria-hidden="true"
           name="chevron-forward"
@@ -17,7 +16,7 @@
         ></ion-icon>
       </span>
     </h2>
-    <h3>{{ message.subject }}</h3>
+    <h3>{{ device.name }}</h3>
     <p>
       Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
       tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim

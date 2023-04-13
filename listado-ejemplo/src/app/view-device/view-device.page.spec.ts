@@ -2,19 +2,19 @@ import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { IonicModule } from '@ionic/angular';
 import { provideRouter } from '@angular/router';
 
-import { ViewMessagePage } from './view-message.page';
+import { ViewDevicePage } from './view-device.page';
 
-describe('ViewMessagePage', () => {
-  let component: ViewMessagePage;
-  let fixture: ComponentFixture<ViewMessagePage>;
+describe('ViewDevicePage', () => {
+  let component: ViewDevicePage;
+  let fixture: ComponentFixture<ViewDevicePage>;
 
   beforeEach(async () => {
     TestBed.configureTestingModule({
-      imports: [ViewMessagePage, IonicModule],
+      imports: [ViewDevicePage, IonicModule],
       providers: [provideRouter([])],
     }).compileComponents();
 
-    fixture = TestBed.createComponent(ViewMessagePage);
+    fixture = TestBed.createComponent(ViewDevicePage);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

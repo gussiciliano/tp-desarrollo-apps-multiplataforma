@@ -2,19 +2,19 @@ import { CommonModule } from '@angular/common';
 import { ChangeDetectionStrategy, Component, inject, Input } from '@angular/core';
 import { RouterLink } from '@angular/router';
 import { IonicModule, Platform } from '@ionic/angular';
-import { Message } from '../services/data.service';
+import { Device } from '../services/data.service';
 
 @Component({
-  selector: 'app-message',
-  templateUrl: './message.component.html',
-  styleUrls: ['./message.component.scss'],
+  selector: 'app-device',
+  templateUrl: './device.component.html',
+  styleUrls: ['./device.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
   standalone: true,
   imports: [CommonModule, IonicModule, RouterLink],
 })
-export class MessageComponent {
+export class DeviceComponent {
   private platform = inject(Platform);
-  @Input() message?: Message;
+  @Input() device?: Device;
   isIos() {
     return this.platform.is('ios')
   }

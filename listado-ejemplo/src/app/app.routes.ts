@@ -6,9 +6,9 @@ export const routes: Routes = [
     loadComponent: () => import('./home/home.page').then((m) => m.HomePage),
   },
   {
-    path: 'message/:id',
+    path: 'device/:id',
     loadComponent: () =>
-      import('./view-message/view-message.page').then((m) => m.ViewMessagePage),
+      import('./view-device/view-device.page').then((m) => m.ViewDevicePage),
   },
   {
     path: '',
