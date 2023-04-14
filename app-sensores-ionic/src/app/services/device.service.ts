@@ -28,5 +28,9 @@ export class DeviceService {
     return this.devices;
   }
 
+  public getDeviceById(id: number): Device {
+    return this.devices[id-1];
+  }
+
   constructor() { }
 }
