@@ -7,8 +7,9 @@ var utils   = require('./mysql-connector');
 app.use(express.json()); 
 app.use(express.static('/home/node/app/static/'));
 
+//Dar un listado de dispositivos
 app.get('/devices/', function(req, res, next) {
-    utils.query('SELECT * FROM Devices', function(err, rta, field) {
+    utils.query('SELECT * FROM Dispositivos', function(err, rta, field) {
         if (err) {
             res.send(err).status(400);
             return;
@@ -17,8 +18,9 @@ app.get('/devices/', function(req, res, next) {
     }); 
 });
 
+//traer la info completa de un dispositivo
 app.get('/devices/:id', function(req, res, next) {
-    utils.query('SELECT * FROM Devices WHERE id = ?',req.params.id,
+    utils.query('SELECT * FROM Dispositivos WHERE dispositivoId = ?',req.params.id,
         function(err, rta, field) {
             if (err) {
                 res.send(err).status(400);
@@ -29,9 +31,23 @@ app.get('/devices/:id', function(req, res, next) {
     );
 });
 
-app.post('/devices/', function(req, res, next) {
-    utils.query('INSERT INTO `Devices` (`name`, `description`, `state`, `type`, `range`) VALUES (?, ?, ?, ?, ?)',
-        [req.body.name, req.body.description, req.body.state, req.body.type, req.body.range],
+//último valor de medición por sensor en el gráfico
+app.get('/lastmessure/:deviceid', function(req, res, next) {
+    utils.query('SELECT * FROM Mediciones m WHERE m.medicionId = (SELECT MAX(medicionId) FROM Mediciones WHERE dispositivoId = ?)',req.params.deviceid,
+        function(err, rta, field) {
+            if (err) {
+                res.send(err).status(400);
+                return;
+            }
+            res.send(JSON.stringify(rta)).status(200);
+        }
+    );
+});
+
+//insertar un registro en la tabla de Log_Riegos
+app.post('/logriegos/', function(req, res, next) {
+    utils.query('INSERT INTO `Log_Riegos` (`apertura`, `fecha`, `electrovalvulaId`) VALUES (?, ?, ?)',
+        [req.body.apertura, req.body.fecha, req.body.electrovalvulaId],
         function(err, rta, field) {
             if (err) {
                 res.send(err).status(400);
@@ -42,27 +58,43 @@ app.post('/devices/', function(req, res, next) {
     );
 });
 
-app.put('/devices/:id', function(req, res, next) {
-    utils.query('UPDATE `Devices` SET `name` = ?, `description` = ?, `state` = ?, `type` = ?, `range` = ? WHERE id = ?',
-        [req.body.name, req.body.description, req.body.state, req.body.type, req.body.range, req.params.id],
+//insert sobre la tabla de mediciones para crear un nuevo registro con el nuevo valor solamente
+// si se cierra la electroválvula
+app.post('/messures/', function(req, res, next) {
+    utils.query('INSERT INTO `Mediciones` (`fecha`, `valor`, `dispositivoId`) VALUES (?, ?, ?)',
+        [req.body.fecha, req.body.valor, req.body.dispositivoId],
         function(err, rta, field) {
             if (err) {
                 res.send(err).status(400);
                 return;
             }
-            res.send({ 'changedRows': rta.changedRows }).status(200);
+            res.send({ 'id': rta.insertId }).status(201);
         }
     );
 });
 
-app.delete('/devices/:id', function(req, res, next) {
-    utils.query('DELETE FROM Devices WHERE id = ?',req.params.id,
+//todas las mediciones de un sensor
+app.get('/devices/:id/messures/', function(req, res, next) {
+    utils.query('SELECT * FROM Mediciones WHERE dispositivoId = ?',req.params.id,
         function(err, rta, field) {
             if (err) {
                 res.send(err).status(400);
                 return;
             }
-            res.send("deleted").status(200);
+            res.send(JSON.stringify(rta)).status(200);
+        }
+    );
+});
+
+//log de los riegos para una electroválvula
+app.get('/logriegos/:electrovalvulaId/', function(req, res, next) {
+    utils.query('SELECT * FROM Log_Riegos WHERE electrovalvulaId = ?',req.params.electrovalvulaId,
+        function(err, rta, field) {
+            if (err) {
+                res.send(err).status(400);
+                return;
+            }
+            res.send(JSON.stringify(rta)).status(200);
         }
     );
 });
