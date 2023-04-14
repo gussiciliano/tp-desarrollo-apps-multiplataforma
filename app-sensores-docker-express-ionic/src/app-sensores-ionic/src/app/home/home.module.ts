@@ -6,8 +6,6 @@ import { HomePage } from './home.page';
 
 import { HomePageRoutingModule } from './home-routing.module';
 import { ListDeviceComponent } from '../listdevice/listdevice.component';
-import { BrowserModule } from '@angular/platform-browser';
-import { HttpClientModule } from '@angular/common/http';
 
 
 @NgModule({
@@ -18,9 +16,7 @@ import { HttpClientModule } from '@angular/common/http';
     CommonModule,
     FormsModule,
     IonicModule,
-    HomePageRoutingModule,
-    BrowserModule,
-    HttpClientModule,
+    HomePageRoutingModule
   ],
 })
 export class HomePageModule {}
