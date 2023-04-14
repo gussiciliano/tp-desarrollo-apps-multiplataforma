@@ -5,13 +5,13 @@ import { FormsModule } from '@angular/forms';
 import { HomePage } from './home.page';
 
 import { HomePageRoutingModule } from './home-routing.module';
-import { DeviceComponent } from '../device/device.component';
+import { ListDeviceComponent } from '../listdevice/listdevice.component';
 
 
 @NgModule({
   declarations: [
     HomePage,
-    DeviceComponent],
+    ListDeviceComponent],
   imports: [
     CommonModule,
     FormsModule,
