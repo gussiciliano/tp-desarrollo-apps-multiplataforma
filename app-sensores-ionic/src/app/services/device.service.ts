@@ -28,9 +28,5 @@ export class DeviceService {
     return this.devices;
   }
 
-  getPalabras(): String[] {
-    return ["assdasd", "asdas"];
-  }
-
   constructor() { }
 }
