@@ -1,10 +1,13 @@
 import { Injectable } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
 import { Device } from '../interfaces/device';
 
 @Injectable({
   providedIn: 'root'
 })
 export class DeviceService {
+
+  constructor(private _http: HttpClient) {}
 
   devices: Device[] = [
     {
@@ -35,6 +38,4 @@ export class DeviceService {
   public getLastMessureForDeviceById(id: number): number {
     return 5;
   }
-
-  constructor() { }
 }
