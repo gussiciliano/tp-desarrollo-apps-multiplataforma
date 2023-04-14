@@ -32,5 +32,9 @@ export class DeviceService {
     return this.devices[id-1];
   }
 
+  public getLastMessureForDeviceById(id: number): number {
+    return 5;
+  }
+
   constructor() { }
 }

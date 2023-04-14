@@ -20,7 +20,7 @@ require('highcharts/modules/solid-gauge')(Highcharts);
 export class DevicePage implements OnInit {
 
   public device!: Device;
-  private valorObtenido:number=0;
+  private valorObtenido!: number;
   public myChart:any;
   private chartOptions:any;
   private activatedRoute = inject(ActivatedRoute);
@@ -44,6 +44,7 @@ export class DevicePage implements OnInit {
   ngOnInit() {
     const id = this.activatedRoute.snapshot.paramMap.get('id') as string;
     this.device = this.deviceService.getDeviceById(parseInt(id, 10));
+    this.valorObtenido = this.deviceService.getLastMessureForDeviceById(parseInt(id, 10));
   }
 
   ionViewDidEnter() {
