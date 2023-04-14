@@ -8,12 +8,11 @@ export const routes: Routes = [
   {
     path: 'device/:id',
     loadComponent: () =>
-      import('./view-device/view-device.page').then((m) => m.ViewDevicePage),
+      import('./device/device.page').then((m) => m.DevicePage),
   },
   {
     path: '',
     redirectTo: 'home',
     pathMatch: 'full',
-  },
+  }
 ];
-

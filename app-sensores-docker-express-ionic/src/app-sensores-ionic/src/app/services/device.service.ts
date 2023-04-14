@@ -1,16 +1,15 @@
 import { Injectable } from '@angular/core';
-
-export interface Device {
-  id: number;
-  name: string;
-  location: string;
-}
+import { HttpClient } from '@angular/common/http';
+import { Device } from '../interfaces/device';
 
 @Injectable({
   providedIn: 'root'
 })
-export class DataService {
-  public devices: Device[] = [
+export class DeviceService {
+
+  constructor(private _http: HttpClient) {}
+
+  devices: Device[] = [
     {
       id: 1,
       name: 'Name 1 Test',
@@ -26,15 +25,17 @@ export class DataService {
       name: 'Name 3 Test',
       location: 'Ubi 3',
     },
-  ];
+  ]
 
-  constructor() { }
-
-  public getDevices(): Device[] {
+  getDevices(): Device[] {
     return this.devices;
   }
 
   public getDeviceById(id: number): Device {
-    return this.devices[id];
+    return this.devices[id-1];
+  }
+
+  public getLastMessureForDeviceById(id: number): number {
+    return 5;
   }
 }
