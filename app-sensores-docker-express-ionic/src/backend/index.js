@@ -3,9 +3,17 @@ var PORT    = 3000;
 var express = require('express');
 var app     = express();
 var utils   = require('./mysql-connector');
+const cors = require('cors');
 
 app.use(express.json()); 
 app.use(express.static('/home/node/app/static/'));
+
+var corsOptions = {
+    origin: '*',
+    optionsSuccessStatus: 200 // some legacy browsers (IE11, various SmartTVs) choke on 204
+}
+// to enable cors
+app.use(cors(corsOptions));
 
 //Dar un listado de dispositivos
 app.get('/devices/', function(req, res, next) {

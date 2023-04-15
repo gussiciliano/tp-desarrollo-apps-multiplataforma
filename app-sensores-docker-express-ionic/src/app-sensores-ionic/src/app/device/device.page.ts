@@ -43,7 +43,9 @@ export class DevicePage implements OnInit {
 
   ngOnInit() {
     const id = this.activatedRoute.snapshot.paramMap.get('id') as string;
-    this.device = this.deviceService.getDeviceById(parseInt(id, 10));
+    this.deviceService.getDeviceById(parseInt(id, 10)).subscribe(data => {
+      this.device = data[0];
+    })
     this.valorObtenido = this.deviceService.getLastMessureForDeviceById(parseInt(id, 10));
   }
 
@@ -61,7 +63,7 @@ export class DevicePage implements OnInit {
           plotShadow: false
         }
         ,title: {
-          text: 'Sensor N° ' + this.device.id
+          text: 'Sensor N° ' + this.device.dispositivoId
         }
 
         ,credits:{enabled:false}

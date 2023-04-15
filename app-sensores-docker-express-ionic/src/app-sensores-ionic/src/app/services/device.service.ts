@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Device } from '../interfaces/device';
+import { Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -9,30 +10,12 @@ export class DeviceService {
 
   constructor(private _http: HttpClient) {}
 
-  devices: Device[] = [
-    {
-      id: 1,
-      name: 'Name 1 Test',
-      location: 'Ubi 1',
-    },
-    {
-      id: 2,
-      name: 'Name 2 Test',
-      location: 'Ubi 2',
-    },
-    {
-      id: 3,
-      name: 'Name 3 Test',
-      location: 'Ubi 3',
-    },
-  ]
-
-  getDevices(): Device[] {
-    return this.devices;
+  getDevices(): Observable<Device[]> {
+    return this._http.get<Device[]>('http://localhost:8000/devices');
   }
 
-  public getDeviceById(id: number): Device {
-    return this.devices[id-1];
+  public getDeviceById(id: number): Observable<Device[]> {
+    return this._http.get<Device[]>('http://localhost:8000/devices/'+id);
   }
 
   public getLastMessureForDeviceById(id: number): number {

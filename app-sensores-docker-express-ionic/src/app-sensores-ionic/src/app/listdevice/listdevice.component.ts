@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { RouterLink } from '@angular/router';
 import { IonicModule } from '@ionic/angular';
 import { Device } from '../interfaces/device';
@@ -16,10 +16,14 @@ import { DeviceService } from '../services/device.service';
     RouterLink
   ],
 })
-export class ListDeviceComponent {
+export class ListDeviceComponent implements OnInit {
 
-  constructor(
-    private deviceService: DeviceService) {}
+  constructor(private deviceService: DeviceService) {}
+  devices?: Device[];
 
-  devices: Device[] = this.deviceService.getDevices();
+  ngOnInit(): void {
+    this.deviceService.getDevices().subscribe(data => {
+      this.devices = data;
+    })
+  }
 }
