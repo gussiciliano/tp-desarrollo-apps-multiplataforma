@@ -5,13 +5,14 @@ import { IonicModule } from '@ionic/angular';
 import { ActivatedRoute, RouterLink } from '@angular/router';
 import { Medicion } from '../interfaces/medicion';
 import { DeviceService } from '../services/device.service';
+import { FormatoFechaPipe } from '../pipes/formato-fecha.pipe';
 
 @Component({
   selector: 'app-mediciones',
   templateUrl: './mediciones.page.html',
   styleUrls: ['./mediciones.page.scss'],
   standalone: true,
-  imports: [IonicModule, CommonModule, FormsModule, RouterLink]
+  imports: [IonicModule, CommonModule, FormsModule, RouterLink, FormatoFechaPipe]
 })
 export class MedicionesPage implements OnInit {
 
