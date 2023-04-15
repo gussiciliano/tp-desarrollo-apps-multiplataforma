@@ -20,7 +20,7 @@ export const routes: Routes = [
     loadComponent: () => import('./mediciones/mediciones.page').then( m => m.MedicionesPage)
   },
   {
-    path: 'logriegos/:id',
+    path: 'logriegos/:deviceId',
     loadComponent: () => import('./log-riegos/log-riegos.page').then( m => m.LogRiegosPage)
   }
 ];

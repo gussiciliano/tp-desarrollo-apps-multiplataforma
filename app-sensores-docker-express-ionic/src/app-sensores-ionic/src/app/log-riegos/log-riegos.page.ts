@@ -22,11 +22,14 @@ export class LogRiegosPage implements OnInit {
   dispositivoId!: number;
 
   ngOnInit() {
-    const deviceId = this.activatedRoute.snapshot.paramMap.get('id') as string;
+    const deviceId = this.activatedRoute.snapshot.paramMap.get('deviceId') as string;
     this.dispositivoId = parseInt(deviceId, 10);
-    this.deviceService.getLogRiegos(this.dispositivoId).subscribe(data => {
-      this.logRiegos = data;
-    })
+    this.deviceService.getDeviceById(this.dispositivoId).subscribe(data => {
+      const electrovalvulaId = data[0].electrovalvulaId;
+      this.deviceService.getLogRiegos(electrovalvulaId).subscribe(data => {
+        this.logRiegos = data;
+      })
+    });
   }
 
 }

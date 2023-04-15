@@ -11,10 +11,10 @@
         <ion-button (click)='abrirElectroValvula()'>Boton</ion-button>
       </ion-col>
       <ion-col size="12" class="ion-text-center">
-        <ion-button [routerLink]="'/mediciones/1'">Ver todas las mediciones</ion-button>
+        <ion-button [routerLink]="'/mediciones/' + dispositivoId">Ver todas las mediciones</ion-button>
       </ion-col>
       <ion-col size="12" class="ion-text-center">
-        <ion-button [routerLink]="'/logriegos/1'">Ver LOG Riegos</ion-button>
+        <ion-button [routerLink]="'/logriegos/' + dispositivoId">Ver LOG Riegos</ion-button>
       </ion-col>
       <ion-col size="12" class="ion-text-center">
         <ion-button [routerLink]="'/home'">Volver al listado</ion-button>

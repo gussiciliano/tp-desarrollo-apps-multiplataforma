@@ -50,8 +50,8 @@ export class DeviceService {
   }
 
   //5. consultar el log de los riegos para una electroválvula
-  public getLogRiegos(id: number): Observable<LogRiegos[]> {
-    return this._http.get<LogRiegos[]>('http://localhost:8000/logriegos/'+id);
+  public getLogRiegos(electrovalvulaId: number): Observable<LogRiegos[]> {
+    return this._http.get<LogRiegos[]>('http://localhost:8000/logriegos/'+electrovalvulaId);
   }
 
   public abrirElectroValvula(dispositivoId: number) {
