@@ -6,6 +6,7 @@ import * as Highcharts from 'highcharts';
 import { ActivatedRoute } from '@angular/router';
 import { Device } from '../interfaces/device';
 import { DeviceService } from '../services/device.service';
+import { RouterLink } from '@angular/router';
 declare var require: any;
 require('highcharts/highcharts-more')(Highcharts);
 require('highcharts/modules/solid-gauge')(Highcharts);
@@ -15,7 +16,7 @@ require('highcharts/modules/solid-gauge')(Highcharts);
   templateUrl: './device.page.html',
   styleUrls: ['./device.page.scss'],
   standalone: true,
-  imports: [IonicModule, CommonModule, FormsModule]
+  imports: [IonicModule, CommonModule, FormsModule, RouterLink]
 })
 export class DevicePage implements OnInit {
 

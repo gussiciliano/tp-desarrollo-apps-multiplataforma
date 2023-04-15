@@ -14,5 +14,9 @@ export const routes: Routes = [
     path: '',
     redirectTo: 'home',
     pathMatch: 'full',
+  },
+  {
+    path: 'mediciones/:id',
+    loadComponent: () => import('./mediciones/mediciones.page').then( m => m.MedicionesPage)
   }
 ];
