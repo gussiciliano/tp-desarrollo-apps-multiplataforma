@@ -27,6 +27,15 @@ export class DeviceService {
   getLogRiegos(id: number): Observable<LogRiegos[]> {
     return this._http.get<LogRiegos[]>('http://localhost:8000/logriegos/'+id);
   }
+
+  postLogRiegos(deviceId: number) {
+    let logRiego: LogRiegos = {
+      apertura: '1',
+      fecha: '2020-10-10 00:00:01',
+      electrovalvulaId: 1
+    }
+    this._http.post('http://localhost:8000/logriegos/',logRiego)
+  }
   
   public getLastMessureForDeviceById(id: number): number {
     return 5;

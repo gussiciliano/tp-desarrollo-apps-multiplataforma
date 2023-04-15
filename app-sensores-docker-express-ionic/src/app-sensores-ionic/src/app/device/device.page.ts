@@ -27,19 +27,12 @@ export class DevicePage implements OnInit {
   private activatedRoute = inject(ActivatedRoute);
 
   constructor(
-    private deviceService: DeviceService) {
-    setTimeout(()=>{
-      console.log("Cambio el valor del sensor");
-      this.valorObtenido=60;
-      //llamo al update del chart para refrescar y mostrar el nuevo valor
-      this.myChart.update({series: [{
-          name: 'kPA',
-          data: [this.valorObtenido],
-          tooltip: {
-              valueSuffix: ' kPA'
-          }
-      }]});
-    },6000);
+    private deviceService: DeviceService) {}
+
+  abrirElectroValvula() {
+    this.valorObtenido=60;
+    this.updateChart();
+    this.deviceService.postLogRiegos(this.device.electrovalvulaId);
   }
 
   ngOnInit() {
@@ -48,6 +41,16 @@ export class DevicePage implements OnInit {
       this.device = data[0];
     })
     this.valorObtenido = this.deviceService.getLastMessureForDeviceById(parseInt(id, 10));
+  }
+
+  updateChart() {
+    this.myChart.update({series: [{
+      name: 'kPA',
+      data: [this.valorObtenido],
+      tooltip: {
+          valueSuffix: ' kPA'
+      }
+    }]});
   }
 
   ionViewDidEnter() {
