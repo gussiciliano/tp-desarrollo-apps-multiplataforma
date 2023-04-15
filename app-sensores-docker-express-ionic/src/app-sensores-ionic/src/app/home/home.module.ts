@@ -6,12 +6,14 @@ import { HomePage } from './home.page';
 
 import { HomePageRoutingModule } from './home-routing.module';
 import { ListDeviceComponent } from '../listdevice/listdevice.component';
+import { HighlightDirective } from '../directives/highlight.directive';
 
 
 @NgModule({
   declarations: [
     HomePage,
-    ListDeviceComponent],
+    ListDeviceComponent,
+    HighlightDirective],
   imports: [
     CommonModule,
     FormsModule,
