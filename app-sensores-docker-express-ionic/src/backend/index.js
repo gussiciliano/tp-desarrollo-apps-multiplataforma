@@ -54,6 +54,7 @@ app.get('/lastmessure/:deviceid', function(req, res, next) {
 
 //insertar un registro en la tabla de Log_Riegos
 app.post('/logriegos/', function(req, res, next) {
+    console.log("post riegos");
     utils.query('INSERT INTO `Log_Riegos` (`apertura`, `fecha`, `electrovalvulaId`) VALUES (?, ?, ?)',
         [req.body.apertura, req.body.fecha, req.body.electrovalvulaId],
         function(err, rta, field) {
@@ -69,6 +70,7 @@ app.post('/logriegos/', function(req, res, next) {
 //insert sobre la tabla de mediciones para crear un nuevo registro con el nuevo valor solamente
 // si se cierra la electroválvula
 app.post('/messures/', function(req, res, next) {
+    console.log("post messures");
     utils.query('INSERT INTO `Mediciones` (`fecha`, `valor`, `dispositivoId`) VALUES (?, ?, ?)',
         [req.body.fecha, req.body.valor, req.body.dispositivoId],
         function(err, rta, field) {

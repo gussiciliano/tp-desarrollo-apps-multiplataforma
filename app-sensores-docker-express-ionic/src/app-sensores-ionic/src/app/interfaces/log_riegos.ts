@@ -1,5 +1,5 @@
 export interface LogRiegos {
-  logRiegoId: number,
+  logRiegoId?: number,
   apertura: string,
   fecha: string,
   electrovalvulaId: number
