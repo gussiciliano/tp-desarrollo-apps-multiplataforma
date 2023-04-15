@@ -27,23 +27,45 @@ export class DevicePage implements OnInit {
   private activatedRoute = inject(ActivatedRoute);
 
   constructor(
-    private deviceService: DeviceService) {}
-
-  abrirElectroValvula() {
-    this.valorObtenido=60;
-    this.updateChart();
-    this.deviceService.postLogRiegos(this.device.electrovalvulaId);
-  }
+    private deviceService: DeviceService) {
+      setInterval(()=>{
+        console.log("Cambio el valor del sensor");
+        this.refreshChartWithLastMeassure();
+      },60000);
+    }
 
   ngOnInit() {
     const id = this.activatedRoute.snapshot.paramMap.get('id') as string;
     this.deviceService.getDeviceById(parseInt(id, 10)).subscribe(data => {
       this.device = data[0];
-    })
-    this.valorObtenido = this.deviceService.getLastMessureForDeviceById(parseInt(id, 10));
+    });
+    this.getAndUpdateLastMeassureValue();
   }
 
-  updateChart() {
+  ionViewDidEnter() {
+    this.generarChart();
+  }
+
+  abrirElectroValvula() {
+    this.deviceService.abrirElectroValvula(this.device.electrovalvulaId);
+    this.refreshChartWithLastMeassure();
+  }
+
+  getAndUpdateLastMeassureValue() {
+    const id = this.activatedRoute.snapshot.paramMap.get('id') as string;
+    this.deviceService.getLastMessureForDeviceById(parseInt(id, 10)).subscribe(data => {
+      this.valorObtenido = parseInt(data[0].valor, 10);
+    });
+  }
+
+  refreshChartWithLastMeassure() {
+    //traigo el valor del API y lo actualizo en la var valorObtenido
+    this.getAndUpdateLastMeassureValue();
+    //llamo al update del chart para refrescar y mostrar el nuevo valor
+    this.updateChartWithLastMeassure();
+  }
+
+  updateChartWithLastMeassure() {
     this.myChart.update({series: [{
       name: 'kPA',
       data: [this.valorObtenido],
@@ -51,10 +73,6 @@ export class DevicePage implements OnInit {
           valueSuffix: ' kPA'
       }
     }]});
-  }
-
-  ionViewDidEnter() {
-    this.generarChart();
   }
 
   generarChart() {
