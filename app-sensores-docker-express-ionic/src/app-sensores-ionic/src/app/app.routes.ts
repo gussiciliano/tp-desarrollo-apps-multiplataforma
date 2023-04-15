@@ -18,5 +18,9 @@ export const routes: Routes = [
   {
     path: 'mediciones/:id',
     loadComponent: () => import('./mediciones/mediciones.page').then( m => m.MedicionesPage)
+  },
+  {
+    path: 'logriegos/:id',
+    loadComponent: () => import('./log-riegos/log-riegos.page').then( m => m.LogRiegosPage)
   }
 ];
