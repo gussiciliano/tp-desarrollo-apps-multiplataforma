@@ -35,10 +35,10 @@ export class DeviceService {
 
   //3. abrir la electroválvula que le corresponde y
   //b. insert sobre la tabla de mediciones
-  public postMedicion(dispositivoId: number) {
+  public postMedicion(dispositivoId: number, valorMedicion: string) {
     let medicion: Medicion = {
       fecha: '2020-10-10 00:00:01',
-      valor: '0', //como se moja el terreno asumo que va a bajar a 0
+      valor: valorMedicion, //como se moja el terreno asumo que va a bajar a 0
       dispositivoId: dispositivoId
     }
     this._http.post('http://localhost:8000/logriegos/', medicion);
@@ -54,9 +54,11 @@ export class DeviceService {
     return this._http.get<LogRiegos[]>('http://localhost:8000/logriegos/'+electrovalvulaId);
   }
 
-  public abrirElectroValvula(dispositivoId: number) {
+  public abrirElectrovalvula(dispositivoId: number) {
+    console.log("entro electroval");
     this.postLogRiegos(dispositivoId);
-    this.postMedicion(dispositivoId);
+    this.postMedicion(dispositivoId, '0'); //Baja a 0 por apertura de la electroval
+    console.log("salgo electroval");
   }
 
   public getDeviceById(id: number): Observable<Device[]> {
