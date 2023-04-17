@@ -32,7 +32,13 @@ export class DevicePage implements OnInit {
       setInterval(()=>{
         console.log("Cambio el valor del sensor");
         this.refreshChartWithLastMeassure();
-      },60000);
+      },6000);
+
+      setInterval(()=>{
+        console.log("Mediciones nuevas");
+        const id = this.activatedRoute.snapshot.paramMap.get('id') as string;
+        this.deviceService.postMedicion(parseInt(id, 10), "35");
+      },6000);
     }
 
   ngOnInit() {
@@ -48,8 +54,8 @@ export class DevicePage implements OnInit {
     this.generarChart();
   }
 
-  abrirElectroValvula() {
-    this.deviceService.abrirElectroValvula(this.device.electrovalvulaId);
+  abrirElectrovalvula() {
+    this.deviceService.abrirElectrovalvula(this.device.electrovalvulaId);
     this.refreshChartWithLastMeassure();
   }
 

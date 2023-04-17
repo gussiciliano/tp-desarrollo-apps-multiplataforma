@@ -5,20 +5,16 @@ import { FormsModule } from '@angular/forms';
 import { HomePage } from './home.page';
 
 import { HomePageRoutingModule } from './home-routing.module';
-import { ListDeviceComponent } from '../listdevice/listdevice.component';
-import { HighlightDirective } from '../directives/highlight.directive';
 
 
 @NgModule({
-  declarations: [
-    HomePage,
-    ListDeviceComponent,
-    HighlightDirective],
+  declarations: [],
   imports: [
     CommonModule,
     FormsModule,
     IonicModule,
-    HomePageRoutingModule
+    HomePageRoutingModule,
+    HomePage
   ],
 })
 export class HomePageModule {}

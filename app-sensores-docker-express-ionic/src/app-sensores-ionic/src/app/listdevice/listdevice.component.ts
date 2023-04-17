@@ -4,6 +4,7 @@ import { RouterLink } from '@angular/router';
 import { IonicModule } from '@ionic/angular';
 import { Device } from '../interfaces/device';
 import { DeviceService } from '../services/device.service';
+import { HighlightDirective } from '../directives/highlight.directive';
 
 @Component({
   selector: 'app-list-device',
@@ -13,7 +14,8 @@ import { DeviceService } from '../services/device.service';
   imports: [
     CommonModule,
     IonicModule,
-    RouterLink
+    RouterLink,
+    HighlightDirective
   ],
 })
 export class ListDeviceComponent implements OnInit {
