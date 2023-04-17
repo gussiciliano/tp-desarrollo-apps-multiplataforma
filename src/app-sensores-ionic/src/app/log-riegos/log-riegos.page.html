@@ -16,7 +16,7 @@
           <ion-icon *ngIf="log.apertura; else condicionElse" name="checkmark-outline"></ion-icon>
           <ng-template #condicionElse><ion-icon name="close-outline"></ion-icon></ng-template>
         </ion-col>
-        <ion-col>{{ log.fecha }}</ion-col>
+        <ion-col>{{ log.fecha | formatoFecha }}</ion-col>
         <ion-col>{{ log.electrovalvulaId }}</ion-col>
       </ion-row>
     </ion-grid>
