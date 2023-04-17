@@ -30,7 +30,7 @@ export class DeviceService {
     let logRiego: LogRiegos = {
       apertura: '1',
       fecha: (new Date()).toISOString().split('T')[0],
-      electrovalvulaId: 1
+      electrovalvulaId: deviceId
     }
     this._http.post(this.URLServerBE + '/logriegos',logRiego)
       .subscribe((res) => {

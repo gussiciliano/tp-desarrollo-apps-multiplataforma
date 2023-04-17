@@ -5,13 +5,14 @@ import { IonicModule } from '@ionic/angular';
 import { ActivatedRoute, RouterLink } from '@angular/router';
 import { LogRiegos } from './../interfaces/log_riegos';
 import { DeviceService } from '../services/device.service';
+import { FormatoFechaPipe } from '../pipes/formato-fecha.pipe';
 
 @Component({
   selector: 'app-log-riegos',
   templateUrl: './log-riegos.page.html',
   styleUrls: ['./log-riegos.page.scss'],
   standalone: true,
-  imports: [IonicModule, CommonModule, FormsModule, RouterLink]
+  imports: [IonicModule, CommonModule, FormsModule, RouterLink, FormatoFechaPipe]
 })
 export class LogRiegosPage implements OnInit {
 
