@@ -10,16 +10,18 @@ import { LogRiegos } from '../interfaces/log_riegos';
 })
 export class DeviceService {
 
+  private URLServerBE = 'http://localhost:8000';
+
   constructor(private _http: HttpClient) {}
 
   //1. Dar un listado de dispositivos
   getDevices(): Observable<Device[]> {
-    return this._http.get<Device[]>('http://localhost:8000/devices');
+    return this._http.get<Device[]>(this.URLServerBE + '/devices');
   }
 
   //2. brindar el último valor de medición por sensor en el gráfico
   public getLastMessureForDeviceById(id: number): Observable<Medicion[]> {
-    return this._http.get<Medicion[]>('http://localhost:8000/lastmessure/'+id);
+    return this._http.get<Medicion[]>(this.URLServerBE + '/lastmessure/'+id);
   }
 
   //3. abrir la electroválvula que le corresponde y
@@ -27,41 +29,45 @@ export class DeviceService {
   postLogRiegos(deviceId: number) {
     let logRiego: LogRiegos = {
       apertura: '1',
-      fecha: '2020-10-10 00:00:01',
+      fecha: (new Date()).toISOString().split('T')[0],
       electrovalvulaId: 1
     }
-    this._http.post('http://localhost:8000/logriegos/',logRiego)
+    this._http.post(this.URLServerBE + '/logriegos',logRiego)
+      .subscribe((res) => {
+        console.log(res);
+      });
   }
 
   //3. abrir la electroválvula que le corresponde y
   //b. insert sobre la tabla de mediciones
   public postMedicion(dispositivoId: number, valorMedicion: string) {
     let medicion: Medicion = {
-      fecha: '2020-10-10 00:00:01',
+      fecha: (new Date()).toISOString().split('T')[0],
       valor: valorMedicion, //como se moja el terreno asumo que va a bajar a 0
       dispositivoId: dispositivoId
     }
-    this._http.post('http://localhost:8000/logriegos/', medicion);
+    this._http.post(this.URLServerBE + '/messures', medicion)
+      .subscribe((res) => {
+        console.log(res);
+      });
   }
   
   //4. ver todas las mediciones de ese sensor 
   public getMediciones(id: number): Observable<Medicion[]> {
-    return this._http.get<Medicion[]>('http://localhost:8000/devices/'+id+'/messures');
+    return this._http.get<Medicion[]>(this.URLServerBE + '/devices/'+id+'/messures');
   }
 
   //5. consultar el log de los riegos para una electroválvula
   public getLogRiegos(electrovalvulaId: number): Observable<LogRiegos[]> {
-    return this._http.get<LogRiegos[]>('http://localhost:8000/logriegos/'+electrovalvulaId);
+    return this._http.get<LogRiegos[]>(this.URLServerBE + '/logriegos/'+electrovalvulaId);
   }
 
   public abrirElectrovalvula(dispositivoId: number) {
-    console.log("entro electroval");
     this.postLogRiegos(dispositivoId);
     this.postMedicion(dispositivoId, '0'); //Baja a 0 por apertura de la electroval
-    console.log("salgo electroval");
   }
 
   public getDeviceById(id: number): Observable<Device[]> {
-    return this._http.get<Device[]>('http://localhost:8000/devices/'+id);
+    return this._http.get<Device[]>(this.URLServerBE + '/devices/'+id);
   }
 }

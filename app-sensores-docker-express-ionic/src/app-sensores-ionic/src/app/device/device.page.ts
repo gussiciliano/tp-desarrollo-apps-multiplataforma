@@ -30,15 +30,12 @@ export class DevicePage implements OnInit {
   constructor(
     private deviceService: DeviceService) {
       setInterval(()=>{
-        console.log("Cambio el valor del sensor");
-        this.refreshChartWithLastMeassure();
-      },6000);
-
-      setInterval(()=>{
         console.log("Mediciones nuevas");
         const id = this.activatedRoute.snapshot.paramMap.get('id') as string;
-        this.deviceService.postMedicion(parseInt(id, 10), "35");
-      },6000);
+        this.deviceService.postMedicion(parseInt(id, 10), (this.valorObtenido + 5).toString()); //simulo que se va secando
+        console.log("Cambio el valor del sensor");
+        this.refreshChartWithLastMeassure();
+      },12000);
     }
 
   ngOnInit() {
